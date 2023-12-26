@@ -4,6 +4,7 @@ bool Translator::match(int start, int length, std::string&& match_string, std::s
 	for(int i = 0; i < length; i++) {
 		if(match_string[i] != instruction[start + i]) return false;
 	}
+	if(instruction[start + length] != ' ') return false;
 	return true;
 }
 
@@ -23,6 +24,8 @@ void Translator::translate(std::string& instruction) {
 			if(match(1, 2, "DD", instruction)) return;
 			else if(match(1, 3, "DDI", instruction)) {
 				instruction.replace(0, 4, "ADD");
+				// std::cerr << "Here: ADDI" << std::endl;
+				// std::cerr << instruction << std::endl;
 				return;
 			}
 			else if(match(1, 3, "DDS", instruction)) return;
