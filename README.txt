@@ -1,7 +1,7 @@
 LEGWork
 ---
-An interpreter for the LEGv8 language.
+LEGv8 assembler (copy and paste text into a file and leg gcc do the work)
 
 Philosophy
 ---
-Make it cool first.
+Simplicity first.
