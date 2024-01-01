@@ -24,8 +24,6 @@ void Translator::translate(std::string& instruction) {
 			if(match(1, 2, "DD", instruction)) return;
 			else if(match(1, 3, "DDI", instruction)) {
 				instruction.replace(0, 4, "ADD");
-				// std::cerr << "Here: ADDI" << std::endl;
-				// std::cerr << instruction << std::endl;
 				return;
 			}
 			else if(match(1, 3, "DDS", instruction)) return;
@@ -39,6 +37,7 @@ void Translator::translate(std::string& instruction) {
 				return;
 			}
 			else throw -1;
+			break;
 		case 'S':
 			if(match(1, 2, "UB", instruction)) return;
 			else if(match(1, 3, "UBI", instruction)) {
@@ -65,5 +64,62 @@ void Translator::translate(std::string& instruction) {
 				return;
 			}
 			else throw -1;
+			break;
+		case 'L':
+			if(match(1, 3, "DUR", instruction)) return;
+			else if(match(1, 5, "DURSW", instruction)) return;
+			else if(match(1, 3, "DRH", instruction)) return;
+			else if(match(1, 3, "DRB", instruction)) return;
+			else if(match(1, 3, "DXR", instruction)) return;
+			else if(match(1, 3, "DXR", instruction)) return;
+			else if(match(1, 2, "SL", instruction)) return;
+			else if(match(1, 2, "SR", instruction)) return;
+			else throw -1;
+			break;
+		case 'M':
+			if(match(1, 3, "OVZ", instruction)) return;
+			else if(match(1, 3, "OVK", instruction)) return;
+			else throw -1;
+			break;
+		case 'O':
+			if(match(1, 2, "RR", instruction)) return;
+			else if(match(1, 2, "RRI", instruction)) {
+				instruction.replace(0, 4, "ORR");
+			}
+			else throw -1;
+			break;
+		case 'E':
+			if(match(1, 2, "OR", instruction)) return;
+			else if(match(1, 3, "ORI", instruction)) {
+				instruction.replace(0, 4, "EOR");
+			}
+			else throw -1;
+			break;
+		case 'C':
+			if(match(1, 2, "BZ", instruction)) return;
+			else if(match(1, 3, "BNZ", instruction)) return;
+			else throw -1;
+			break;
+		case 'B':
+			if(match(1, 0, "", instruction)) return;
+      else if(match(1, 1, "R", instruction)) return;
+      else if(match(1, 1, "L", instruction)) return;
+      else if(match(1, 3, ".EQ", instruction)) return;
+      else if(match(1, 3, ".NE", instruction)) return;
+      else if(match(1, 3, ".MI", instruction)) return;
+      else if(match(1, 3, ".PL", instruction)) return;
+      else if(match(1, 3, ".VS", instruction)) return;
+      else if(match(1, 3, ".VC", instruction)) return;
+      else if(match(1, 3, ".HI", instruction)) return;
+      else if(match(1, 3, ".HS", instruction)) return;
+      else if(match(1, 3, ".LS", instruction)) return;
+      else if(match(1, 3, ".GE", instruction)) return;
+      else if(match(1, 3, ".LT", instruction)) return;
+      else if(match(1, 3, ".LO", instruction)) return;
+      else if(match(1, 3, ".GT", instruction)) return;
+      else if(match(1, 3, ".LE", instruction)) return;
+			else throw -1;
+			break;
+    default: throw -1;
 	}
 }

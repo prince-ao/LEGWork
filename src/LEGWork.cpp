@@ -17,16 +17,20 @@ LEGWork::~LEGWork() {
 void LEGWork::start() {
 	std::string instruction;
 	std::fstream readFile(file);
+	int line = 0;
 
 	while(std::getline(readFile, instruction)) {
+		++line;
 		try {
 			translator->translate(instruction);
 			entire_file += ("\t" + instruction + "\n");
 		} catch(...) {
-			std::cerr << "unknown instruction error: " << instruction << std::endl;
+			std::cerr << "unknown instruction error in line " << line << ": " << instruction << std::endl;
 			exit(1);
 		}
 	}
+
+	entire_file += "\nmov x0, #0\nmov x8, #0\nsvc 0"; // exit 0
 
 	std::cout << entire_file << std::endl;
 
