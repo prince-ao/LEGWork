@@ -6,5 +6,6 @@
 #include <iostream>
 #include <string_view>
 #include <cstdlib>
+#include <cstring>
 
 #endif

@@ -22,7 +22,7 @@ void LEGWork::parseArguments(int argv, char* argc[]) {
         ++i;
       }
     } else {
-      if(inputFile != "") {
+      if(arguments.inputFile != "") {
         std::cerr << "Unknown argument: " << argc[i] << std::endl;
         printHelp();
         exit(1);
