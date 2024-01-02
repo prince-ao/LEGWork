@@ -1,6 +1,10 @@
 #include "LEGWork.h"
 
 LEGWork::LEGWork(int argv, char* argc[]) {
+  if(argv == 1) {
+    printHelp();
+    exit(1):
+  }
   parseArguments(argv, argc);
 
   if(arguments.help) {
