@@ -16,7 +16,7 @@ public:
 private:
   struct CommnadlineArguments {
     bool help{};
-    std::string_view outputFile{""};
+    std::string_view outputFile{"a.out"};
     std::string_view inputFile{""};
   } arguments;
 	std::string file;

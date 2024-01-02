@@ -62,11 +62,9 @@ void LEGWork::start() {
 	entire_file += "\nmov x0, #0\nmov x8, #0\nsvc 0"; // exit 0
                                                     //
 
-  const char* assemble = ("echo \"\"\"" + entire_file + "\"\"\" | as -o temp.o").c_str();
-  const char* load = ("ld temp.o " + std::string{arguments.outputFile} + " && rm temp.o").c_str();
-  int assembleStatusCode = std::system(assemble);
+  int assembleStatusCode = std::system(("echo \"\"\"" + entire_file + "\"\"\" | as -o temp.o").c_str());
   if(assembleStatusCode != 0) {
     exit(1);
   }
-  std::system(load);
+  std::system(("ld temp.o -o " + std::string{arguments.outputFile} + " && rm temp.o").c_str());
 }
