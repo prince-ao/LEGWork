@@ -3,7 +3,7 @@
 LEGWork::LEGWork(int argv, char* argc[]) {
   if(argv == 1) {
     printHelp();
-    exit(1):
+    exit(1);
   }
   parseArguments(argv, argc);
 
