@@ -11,10 +11,17 @@ public:
 	~LEGWork();
 
 	void start();
+  void parseArguments(int argv, char* argc[]);
+  void printHelp();
 private:
+  struct CommnadlineArguments {
+    bool help{};
+    std::string_view outputFile{""};
+    std::string_view inputFile{""};
+  } arguments;
 	std::string file;
 	Translator* translator;
-	std::string entire_file = 
+	std::string entire_file =
 ".text\n\
 .global _start\n\n\
 _start:\n\

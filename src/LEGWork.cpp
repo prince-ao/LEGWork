@@ -1,13 +1,42 @@
 #include "LEGWork.h"
 
 LEGWork::LEGWork(int argv, char* argc[]) {
-	if(argv != 2) {
-		std::cerr << "Usage: legwork <filename>" << std::endl;
-		exit(1);
-	}
+  parseArguments(argv, argc);
 
-	file = argc[1];
-	translator = new Translator;
+  if(arguments.help) {
+    printHelp();
+    exit(0);
+  }else {
+    file = arguments.inputFile;
+    translator = new Translator;
+  }
+}
+
+void LEGWork::parseArguments(int argv, char* argc[]) {
+  for(int i = 1; i < argv; i++) {
+    if(strcmp(argc[i], "--help") == 0 || strcmp(argc[i], "-h") == 0) {
+      arguments.help = true;
+    } else if(strcmp(argc[i], "-o") == 0) {
+      if(i + 1 < argv) {
+        arguments.outputFile = argc[i + 1];
+        ++i;
+      }
+    } else {
+      if(inputFile != "") {
+        std::cerr << "Unknown argument: " << argc[i] << std::endl;
+        printHelp();
+        exit(1);
+      }
+      arguments.inputFile = argc[i];
+    }
+  }
+}
+
+void LEGWork::printHelp() {
+  std::cout << "Usage: legwork [option...] <input_file>" << std::endl;
+  std::cout << "Options:" << std::endl;
+  std::cout << "  -h, --help" << std::endl;
+  std::cout << "  -o <output_file>" << std::endl;
 }
 
 LEGWork::~LEGWork() {
@@ -31,8 +60,6 @@ void LEGWork::start() {
 	}
 
 	entire_file += "\nmov x0, #0\nmov x8, #0\nsvc 0"; // exit 0
-
-	std::cout << entire_file << std::endl;
 
 	std::system(("echo \"\"\"" + entire_file + "\"\"\" | as -o temp.o").c_str());
 	std::system("ld temp.o && rm temp.o");
