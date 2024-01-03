@@ -1,7 +1,11 @@
 LEGWork
 ---
-LEGv8 assembler (copy and paste text into a file and leg gcc do the work)
+LEGv8 assembler 
 
-Philosophy
+
+Usage
 ---
-Simplicity first.
+Usage: legwork [option...] <input_file>
+Options:
+  -h, --help
+  -o <output_file>
